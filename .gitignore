@@ -108,6 +108,7 @@ _ReSharper*/
 
 # Local development settings
 appsettings.Local.json
+.local/
 
 # macOS specific files
 .DS_Store
