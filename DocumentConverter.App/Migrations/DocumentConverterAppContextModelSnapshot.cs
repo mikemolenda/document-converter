@@ -39,7 +39,7 @@ namespace DocumentConverter.App.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Documents");
+                    b.ToTable("documents", (string)null);
                 });
 
             modelBuilder.Entity("DocumentConverter.App.Models.DocumentFile", b =>
@@ -64,7 +64,7 @@ namespace DocumentConverter.App.Migrations
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("DocumentFile");
+                    b.ToTable("document_files", (string)null);
                 });
 
             modelBuilder.Entity("DocumentConverter.App.Models.User", b =>
@@ -84,7 +84,7 @@ namespace DocumentConverter.App.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("users", (string)null);
                 });
 
             modelBuilder.Entity("DocumentConverter.App.Models.Document", b =>

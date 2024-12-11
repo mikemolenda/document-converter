@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DocumentConverter.App.Migrations
 {
     [DbContext(typeof(DocumentConverterAppContext))]
-    [Migration("20241210135744_UpdateUserFileLimits")]
-    partial class UpdateUserFileLimits
+    [Migration("20241211023129_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,14 +25,15 @@ namespace DocumentConverter.App.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("DocumentConverter.App.Document", b =>
+            modelBuilder.Entity("DocumentConverter.App.Models.Document", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uuid");
@@ -41,10 +42,35 @@ namespace DocumentConverter.App.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Documents");
+                    b.ToTable("documents", (string)null);
                 });
 
-            modelBuilder.Entity("DocumentConverter.App.User", b =>
+            modelBuilder.Entity("DocumentConverter.App.Models.DocumentFile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("DocumentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Format")
+                        .HasColumnType("integer");
+
+                    b.Property<long>("Size")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentId");
+
+                    b.ToTable("document_files", (string)null);
+                });
+
+            modelBuilder.Entity("DocumentConverter.App.Models.User", b =>
                 {
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
@@ -61,17 +87,29 @@ namespace DocumentConverter.App.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("DocumentConverter.App.Document", b =>
+            modelBuilder.Entity("DocumentConverter.App.Models.Document", b =>
                 {
-                    b.HasOne("DocumentConverter.App.User", null)
+                    b.HasOne("DocumentConverter.App.Models.User", null)
                         .WithMany("Documents")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("DocumentConverter.App.User", b =>
+            modelBuilder.Entity("DocumentConverter.App.Models.DocumentFile", b =>
+                {
+                    b.HasOne("DocumentConverter.App.Models.Document", null)
+                        .WithMany("Files")
+                        .HasForeignKey("DocumentId");
+                });
+
+            modelBuilder.Entity("DocumentConverter.App.Models.Document", b =>
+                {
+                    b.Navigation("Files");
+                });
+
+            modelBuilder.Entity("DocumentConverter.App.Models.User", b =>
                 {
                     b.Navigation("Documents");
                 });

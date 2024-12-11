@@ -28,6 +28,8 @@ if (app.Environment.IsDevelopment())
     SeedDatabase(app);
 }
 
+RunMigrations(app);
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -38,6 +40,15 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void RunMigrations(WebApplication app)
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<DocumentConverterAppContext>();
+        context.Database.Migrate();
+    }
+}
 
 // Seed the database with default data.
 void SeedDatabase(WebApplication app)
