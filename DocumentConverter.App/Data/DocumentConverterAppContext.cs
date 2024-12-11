@@ -20,5 +20,10 @@ public class DocumentConverterAppContext : DbContext
             .HasMany(u => u.Documents)
             .WithOne()
             .HasForeignKey("UserId");
+
+        modelBuilder.Entity<Document>()
+            .HasMany(d => d.Files)
+            .WithOne()
+            .HasForeignKey("DocumentId");
     }
 }
