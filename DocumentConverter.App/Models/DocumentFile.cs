@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
 namespace DocumentConverter.App.Models;
 
 public class DocumentFile
@@ -9,10 +13,21 @@ public class DocumentFile
         TXT
     }
 
+    [Column("id")]
+    [Key]
     public Guid Id { get; set; }
+
+    [Column("format", TypeName = "varchar(10)")]
     public FileFormat Format { get; set; }
+
+    [Column("size")]
     public long Size { get; set; }
-    public DateTime CreatedAt { get; set; }
+
+    [Column("document_id")]
+    public required Guid DocumentId { get; set; }
+
+    [Column("created_at")]
+    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 
     public override bool Equals(object? obj)
     {

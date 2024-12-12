@@ -1,8 +1,36 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "My Documents";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">My Documents</h1>
+    <div>
+        @if (Model.Count == 0)
+        {
+            <p>No documents found</p>
+        }
+        else
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Files</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var document in Model)
+                    {
+                        <tr>
+                            <td>@document.Name</td>
+                            <td></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        <div class="mt-4">
+            <a asp-controller="Home" asp-action="Upload" class="btn btn-primary">Upload New Document</a>
+        </div>
+    </div>
 </div>
