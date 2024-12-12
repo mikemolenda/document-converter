@@ -3,6 +3,7 @@ using System;
 using DocumentConverter.App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DocumentConverter.App.Migrations
 {
     [DbContext(typeof(DocumentConverterAppContext))]
-    partial class DocumentConverterAppContextModelSnapshot : ModelSnapshot
+    [Migration("20241212140504_AddDocumentProcessingStates")]
+    partial class AddDocumentProcessingStates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

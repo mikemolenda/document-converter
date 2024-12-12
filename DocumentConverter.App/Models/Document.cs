@@ -17,6 +17,8 @@ public class Document
     [Column("user_id")]
     public Guid? UserId { get; set; }
 
+    public virtual List<DocumentProcessingState> ProcessingStates { get; set; } = new List<DocumentProcessingState>();
+
     public virtual HashSet<DocumentFile>? Files { get; set; }
 
     public override bool Equals(object? obj)

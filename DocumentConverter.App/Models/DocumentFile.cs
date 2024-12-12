@@ -26,8 +26,7 @@ public class DocumentFile
     [Column("document_id")]
     public required Guid DocumentId { get; set; }
 
-    [Column("created_at")]
-    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
+    public virtual List<DocumentFileProcessingState> ProcessingStates { get; set; } = new List<DocumentFileProcessingState>();
 
     public override bool Equals(object? obj)
     {
