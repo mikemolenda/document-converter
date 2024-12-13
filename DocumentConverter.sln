@@ -1,13 +1,26 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E9F9F756-2679-4EAE-9741-6B7FBAEB73A4}") = "DocumentConverter.App", "DocumentConverter.App\DocumentConverter.App.csproj", "E9F9F756-2679-4EAE-9741-6B7FBAEB73A4"
+EndProject
+Project("{A15991C7-4BFF-4A40-95CF-DF4854210CC6}") = "DocumentConverter.Identity", "DocumentConverter.Identity\DocumentConverter.Identity.csproj", "A15991C7-4BFF-4A40-95CF-DF4854210CC6"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+        {E9F9F756-2679-4EAE-9741-6B7FBAEB73A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {E9F9F756-2679-4EAE-9741-6B7FBAEB73A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {E9F9F756-2679-4EAE-9741-6B7FBAEB73A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {E9F9F756-2679-4EAE-9741-6B7FBAEB73A4}.Release|Any CPU.Build.0 = Release|Any CPU
+        {A15991C7-4BFF-4A40-95CF-DF4854210CC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {A15991C7-4BFF-4A40-95CF-DF4854210CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {A15991C7-4BFF-4A40-95CF-DF4854210CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {A15991C7-4BFF-4A40-95CF-DF4854210CC6}.Release|Any CPU.Build.0 = Release|Any CPU
+    EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

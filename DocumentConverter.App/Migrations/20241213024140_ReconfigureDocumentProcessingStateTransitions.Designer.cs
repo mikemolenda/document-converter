@@ -3,6 +3,7 @@ using System;
 using DocumentConverter.App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DocumentConverter.App.Migrations
 {
     [DbContext(typeof(DocumentConverterAppContext))]
-    partial class DocumentConverterAppContextModelSnapshot : ModelSnapshot
+    [Migration("20241213024140_ReconfigureDocumentProcessingStateTransitions")]
+    partial class ReconfigureDocumentProcessingStateTransitions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,6 +73,38 @@ namespace DocumentConverter.App.Migrations
                     b.HasIndex("DocumentId");
 
                     b.ToTable("document_files", (string)null);
+                });
+
+            modelBuilder.Entity("DocumentConverter.App.Models.DocumentFileProcessingState", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid>("DocumentFileId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("document_file_id");
+
+                    b.Property<string>("FromState")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("from_state");
+
+                    b.Property<string>("ToState")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("to_state");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DocumentFileProcessingStates");
                 });
 
             modelBuilder.Entity("DocumentConverter.App.Models.DocumentFileProcessingStateTransition", b =>

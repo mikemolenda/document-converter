@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using DocumentConverter.App.Models;
 
 namespace DocumentConverter.App.Models;
 
@@ -9,6 +9,7 @@ public class Document
 
     [Column("id")]
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
 
     [Column("name")]
@@ -17,9 +18,9 @@ public class Document
     [Column("user_id")]
     public Guid? UserId { get; set; }
 
-    public virtual List<DocumentProcessingState> ProcessingStates { get; set; } = new List<DocumentProcessingState>();
+    public virtual List<DocumentProcessingStateTransition> ProcessingStateTransitions { get; set; } = new List<DocumentProcessingStateTransition>();
 
-    public virtual HashSet<DocumentFile>? Files { get; set; }
+    public virtual HashSet<DocumentFile> Files { get; set; } = new HashSet<DocumentFile>();
 
     public override bool Equals(object? obj)
     {

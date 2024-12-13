@@ -42,4 +42,10 @@ public class DocumentService : IDocumentService
             .ToListAsync();
     }
 
+    public async Task CreateDocumentAsync(Document document)
+    {
+        await _context.Documents.AddAsync(document);
+        await _context.SaveChangesAsync();
+    }
+
 }

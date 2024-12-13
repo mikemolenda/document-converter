@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
@@ -15,6 +14,7 @@ public class DocumentFile
 
     [Column("id")]
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
 
     [Column("format", TypeName = "varchar(10)")]
@@ -26,7 +26,7 @@ public class DocumentFile
     [Column("document_id")]
     public required Guid DocumentId { get; set; }
 
-    public virtual List<DocumentFileProcessingState> ProcessingStates { get; set; } = new List<DocumentFileProcessingState>();
+    public virtual List<DocumentFileProcessingStateTransition> ProcessingStateTransitions { get; set; } = new List<DocumentFileProcessingStateTransition>();
 
     public override bool Equals(object? obj)
     {
@@ -42,4 +42,4 @@ public class DocumentFile
         return Id.GetHashCode();
     }
 
-} 
+}

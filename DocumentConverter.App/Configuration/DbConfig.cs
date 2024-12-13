@@ -24,33 +24,6 @@ public static class DbConfig
             var context = scope.ServiceProvider.GetRequiredService<DocumentConverterAppContext>();
             context.Database.EnsureCreated();
 
-            // Add file for default document
-            if (!context.DocumentFiles.Any())
-            {
-                context.DocumentFiles.Add(
-                    new DocumentFile
-                    {
-                        Id = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                        Format = DocumentFile.FileFormat.TXT,
-                        Size = 1 * 1024,
-                        DocumentId = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff")
-                    }
-                );
-            }
-
-            // Add document for default user
-            if (!context.Documents.Any())
-            {
-                context.Documents.Add(
-                    new Document
-                    {
-                        Id = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-                        Name = "Sample Document",
-                        UserId = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff")
-                    }
-                );
-            }
-
             // Add default user
             if (!context.Users.Any())
             {

@@ -10,6 +10,8 @@ public static class ServiceExtensions
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddScoped<IDocumentService, DocumentService>();
+        services.AddScoped<IDocumentFileService, DocumentFileService>();
+        services.AddScoped<IDocumentProcessingService, DocumentProcessingService>();
         return services;
     }
 }
